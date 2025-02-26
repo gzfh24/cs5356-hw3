@@ -1,9 +1,136 @@
-<h1>Hi, my name is George.</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>George's Website</title>
 
-<h2> Welcome to my website!</h2>
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://gzfh24.github.io/cs5356-hw3/">
+  <meta property="og:title" content="George's Website">
+  <meta property="og:description" content="George's Website">
+  <meta property="og:image" content="https://gzfh24.github.io/cs5356-hw3/images/penguin.png">
 
-<p>I am a student at Cornell Tech. I am currently pursuing a Master's degree in Computer Science.</p>
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://gzfh24.github.io/cs5356-hw3/">
+  <meta name="twitter:title" content="George's Website">
+  <meta name="twitter:description" content="George's Website">
+  <meta name="twitter:image" content="https://gzfh24.github.io/cs5356-hw3/images/penguin.png">
 
-<p> Here is a photo of a cute penguin NFT.</p>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header, main, footer {
+      padding: 1rem;
+      margin: 0 auto;
+      max-width: 800px;
+    }
+    header {
+      background-color: #f0f0f0;
+      text-align: center;
+    }
+    .bio {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 1rem;
+      align-items: center;
+    }
+    @media (max-width: 600px) {
+      .bio {
+        grid-template-columns: 1fr;
+      }
+    }
+    .side-by-side {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 1rem;
+      margin-top: 2rem;
+    }
+    .blend-image {
+      mix-blend-mode: difference;
+    }
+    .dog-section {
+      margin-top: 2rem;
+      text-align: center;
+    }
+    .dog-section img {
+      max-width: 100%;
+      height: auto;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+    }
+    .dog-section button {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Hi, my name is George.</h1>
+    <h2>Welcome to my website!</h2>
+  </header>
+  <main>
+    <section class="bio">
+      <div>
+        <p>I am a student at Cornell Tech pursuing a Master's degree in Computer Science. I'm passionate about technology, creativity, and continuous learning.</p>
+      </div>
+      <div>
+        <p>Here is a cute photo of a penguin NFT, and beside it is an image where the colors are inversed using the <code>mix-blend-mode</code> CSS property.</p>
+      </div>
+    </section>
+    <section class="side-by-side">
+      <div>
+        <img src="images/penguin.png" alt="Penguin without blend difference" width="100%">
+      </div>
+      <div>
+        <img src="images/penguin.png" alt="Penguin with blend difference" width="100%" class="blend-image">
+      </div>
+    </section>
+    
+    <section>
+      <h3>I used the details HTML element here to make a collapsible section about the stuff I learned.</h3>
+      <details>
+        <summary>What did I learn about the <code>&lt;details&gt;</code> HTML element?</summary>
+        <p>The <code>&lt;details&gt;</code> element creates an interactive, collapsible widget. The accompanying <code>&lt;summary&gt;</code> element acts as the visible label that users can click to reveal or hide additional content to help keep the page uncluttered.</p>
+      </details>
+      <details>
+        <summary>What did I learn about the <code>mix-blend-mode</code> CSS property?</summary>
+        <p>The <code>mix-blend-mode</code> property controls how an element's content blends with the background. By using the <code>difference</code> mode, I discovered that it inverted the image colors because it calculates the difference between the image and the white background.</p>
+      </details>
+    </section>
 
-<img src="images/penguin.png" alt="penguin" width="500" height="auto">
+    <section class="dog-section">
+      <h3>Random Dog Image Generator</h3>
+      <img id="dog-image" src="" alt="Random Dog Image">
+      <br>
+      <button id="fetch-dog">Fetch Another Dog</button>
+    </section>
+
+  </main>
+  <footer>
+    <p>Thank you for visiting my page.</p>
+  </footer>
+
+  <script>
+    function fetchRandomDogImage() {
+      fetch('https://dog.ceo/api/breeds/image/random')
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('dog-image').src = data.message;
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+    document.addEventListener('DOMContentLoaded', fetchRandomDogImage);
+
+    document.getElementById('fetch-dog').addEventListener('click', fetchRandomDogImage);
+  </script>
+
+</body>
+</html>
